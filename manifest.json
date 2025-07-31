@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "勤之助mousemove内容表示",
+  "version": "1.1",
+  "description": "勤之助mousemove内容表示",
+  "content_scripts": [
+    {
+      "matches": ["https://www.e4628.jp/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
