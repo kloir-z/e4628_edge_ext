@@ -1,13 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "勤之助mousemove内容表示",
-  "version": "1.1",
-  "description": "勤之助mousemove内容表示",
+  "name": "勤之助表示カスタマイズ拡張機能",
+  "version": "1.2",
+  "description": "勤之助表示カスタマイズ拡張機能",
+  "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["https://www.e4628.jp/*"],
+      "matches": ["https://www.e4628.jp/?module=timesheet*"],
       "js": ["content.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "options_page": "options.html"
 }

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>勤之助拡張機能 - 設定</title>
+  <style>
+    body {
+      font-family: "Yu Gothic", "Meiryo", sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 600px;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #007acc;
+      padding-bottom: 10px;
+    }
+
+    .section {
+      margin: 20px 0;
+    }
+
+    .section h2 {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      resize: vertical;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background: #005999;
+    }
+
+    .reset-btn {
+      background: #666;
+    }
+
+    .reset-btn:hover {
+      background: #444;
+    }
+
+    .status {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .unsaved-changes {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+      display: none;
+      font-weight: bold;
+    }
+
+    .save-highlight {
+      background: #28a745 !important;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .help {
+      background: #e7f3ff;
+      border: 1px solid #b8daff;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+
+    .help h3 {
+      margin-top: 0;
+      color: #004085;
+    }
+
+    .column-list {
+      font-family: monospace;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    .checkbox-container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      font-size: 16px;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .checkbox-container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      background-color: #eee;
+      border-radius: 3px;
+    }
+
+    .checkbox-container:hover input~.checkmark {
+      background-color: #ccc;
+    }
+
+    .checkbox-container input:checked~.checkmark {
+      background-color: #007acc;
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    .checkbox-container input:checked~.checkmark:after {
+      display: block;
+    }
+
+    .checkbox-container .checkmark:after {
+      left: 7px;
+      top: 3px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+
+    .description {
+      font-size: 14px;
+      color: #666;
+      margin: 5px 0 15px 35px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>勤之助拡張機能 設定</h1>
+
+    <div class="section">
+      <h2>拡張機能の有効/無効</h2>
+      <label class="checkbox-container">
+        <input type="checkbox" id="extensionEnabled">
+        <span class="checkmark"></span>
+        拡張機能を有効にする
+      </label>
+    </div>
+
+    <div class="section">
+      <h2>機能別設定</h2>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="showPopupContent">
+        <span class="checkmark"></span>
+        ポップアップ内容を直接表示する
+      </label>
+      <p class="description">マウスオーバー時のポップアップ内容をセル内に直接表示します</p>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="removeHeaders">
+        <span class="checkmark"></span>
+        月中のヘッダー行を削除する
+      </label>
+      <p class="description">月中に挟まれるヘッダー行を非表示にします</p>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="resizeImages">
+        <span class="checkmark"></span>
+        画像サイズを縮小する
+      </label>
+      <p class="description">ページ内の画像を小さく表示します</p>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="expandRemarks">
+        <span class="checkmark"></span>
+        備考欄を大きく拡張する
+      </label>
+      <p class="description">備考入力ボックス（remarks）を800pxに拡張して使いやすくします</p>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="improveFont">
+        <span class="checkmark"></span>
+        ページ全体のフォントを改善する
+      </label>
+      <p class="description">より読みやすい日本語フォント（Yu Gothic UI、Meiryo UI等）に変更します</p>
+    </div>
+
+    <label class="checkbox-container">
+      <input type="checkbox" id="hideColumns">
+      <span class="checkmark"></span>
+      列を非表示にする
+    </label>
+    <p class="description">指定した列を表から非表示にします</p>
+
+    <div class="section" id="columnsSection">
+      <h2>非表示にする列の設定</h2>
+      <p>非表示にしたい列名を1行ずつ入力してください（部分一致で検索されます）：</p>
+      <textarea id="columnsToHide" placeholder="例：&#10;遅刻&#10;早退&#10;休憩時間&#10;実働時間&#10;所定内労働&#10;残業時間"></textarea>
+    </div>
+
+    <div id="unsavedPrompt" class="unsaved-changes">
+      ⚠️ 設定に変更があります。保存ボタンをクリックして変更を保存してください。
+    </div>
+
+    <div class="buttons">
+      <button id="save">設定を保存</button>
+      <button id="reset" class="reset-btn">デフォルトに戻す</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div class="help">
+      <h3>利用可能な列名</h3>
+      <p>以下は勤之助の表に含まれる主な列名です：</p>
+      <div class="column-list">
+        日, 曜日, カレンダー, 勤務条件, 届出内容, 状況区分, 出社, 早出フラグ, 退社,
+        X残業出, X残業退, 出社２, 退社２, 出社３, 退社３, 休憩時間, 実働時間, 有休時間,
+        遅刻, 早退, 所定内労働, 残業時間, 法定外休出, 所定内深夜, 深夜労働, 法定内残業
+      </div>
+      <p><strong>注意：</strong> 部分一致で検索されます。</p>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>
