@@ -6,7 +6,7 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["https://www.e4628.jp/?module=timesheet*"],
+      "matches": ["https://www.e4628.jp/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
     }

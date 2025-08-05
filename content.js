@@ -250,8 +250,27 @@ const FEATURE_EXECUTORS = {
   improveFont: improveFont,
 };
 
+// 出勤簿ページかどうかをチェック
+function isAttendancePage() {
+  const mainHeaderElements = document.querySelectorAll('td.main_header');
+  
+  for (let i = 0; i < mainHeaderElements.length; i++) {
+    const element = mainHeaderElements[i];
+    const headerText = element.textContent || '';
+    
+    if (headerText.includes('トップページ') && headerText.includes('出勤簿')) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
 // メイン実行関数
 function initializeExtension() {
+  // 出勤簿ページでない場合は何もしない
+  if (!isAttendancePage()) return;
+
   // 設定を読み込み
   chrome.storage.sync.get(Object.keys(DEFAULT_SETTINGS), function (result) {
     const settings = { ...DEFAULT_SETTINGS, ...result };
