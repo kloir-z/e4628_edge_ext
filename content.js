@@ -24,8 +24,8 @@ const EXTENSION_CONFIG = {
     IMPROVED_FONT: `
       body, td, th, input, textarea, select, button {
         font-family: "Yu Gothic UI", "Meiryo UI", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif !important;
-        font-size: 16px !important;
-        line-height: 1.1 !important;
+        font-size: 14px !important;
+        padding: 1.5px 10px;
       }
       table {
         font-family: "Yu Gothic UI", "Meiryo UI", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif !important;
